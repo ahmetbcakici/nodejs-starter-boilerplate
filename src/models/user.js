@@ -1,26 +1,3 @@
-/**
- * @swagger
- *  components:
- *    schemas:
- *      User:
- *        type: object
- *        required:
- *          - name
- *          - surname
- *          - email
- *          - password
- *        properties:
- *          name:
- *            type: string
- *          surname:
- *            type: string
- *          email:
- *            type: string
- *            format: email
- *          password:
- *            type: string
- */
-
 import { model, Schema } from 'mongoose';
 
 const userSchema = new Schema({
@@ -32,10 +9,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
