@@ -17,16 +17,11 @@ export default {
     },
     servers: [
       {
-        url: 'http://localhost:2000/api/v1',
+        url: 'http://localhost:8080/api/v1',
       },
     ],
   },
   apis: [
-    './models/*',
-    './routes/*',
-    './controllers/user/*',
-    './controllers/level/*',
-    './controllers/organ/*',
-    './controllers/question/*',
+    '../models/*'
   ],
 };
