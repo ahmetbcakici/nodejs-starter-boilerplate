@@ -1,20 +1,20 @@
-import { Router } from 'express';
+import { Router } from 'express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 
 import user from './user'
-import { swaggerConfig } from '../../config'
+import { api, swaggerConfig } from '../../config'
 
-const router = Router();
-const specs = swaggerJsdoc(swaggerConfig);
+const router = Router()
+const specs = swaggerJsdoc(swaggerConfig)
 
-router.use('/docs', swaggerUi.serve);
+router.use(api.specs, swaggerUi.serve)
 router.get(
-  '/docs',
+  api.specs,
   swaggerUi.setup(specs, {
     explorer: true,
   })
-);
+)
 
 router.use('/user', user)
 

@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { api } from './config'
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = api.port;
 dotenv.config();
 
 require('./loaders').default({ expressApp: app });

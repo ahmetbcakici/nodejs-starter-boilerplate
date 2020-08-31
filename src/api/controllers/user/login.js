@@ -1,21 +1,34 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
-import { User } from '../../../models';
+import { User } from '../../../models'
+import { loginSchema } from '../../validators/user.validators'
 
-export default async (req, res) => {
-  const { email, password } = req.body;
+export default async (req, res, next) => {
+  const { email, password } = req.body
 
-  if (!email || !password)
-    return res.status(400).send('You can not leave fields empty.');
+  try {
+    await loginSchema.validateAsync(req.body)
 
-  const user = await User.findOne({ email });
-  if (!user) return res.status(404).send('User not found.');
+    const user = await User.findOne({ email })
+    if (!user) {
+      const err = new Error('User not found')
+      err['status'] = 404
+      return next(err)
+    }
 
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) return res.status(401).send('Incorrect Pass');
+    const match = await bcrypt.compare(password, user.password)
+    if (!match) {
+      const err = new Error('Incorrect password')
+      err['status'] = 401
+      return next(err)
+    }
 
-  user.password = null;
-  const token = await jwt.sign({ user }, process.env.JWT_SECRET_KEY);
-  res.json({ user, token });
-};
+    user.password = null
+    const token = await jwt.sign({ user }, process.env.JWT_SECRET_KEY)
+    res.status(200).json({ user, token })
+  }
+  catch (err) {
+    return next(err)
+  }
+}
