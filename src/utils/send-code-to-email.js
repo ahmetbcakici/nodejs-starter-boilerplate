@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 
+import { api } from '../config'
+
 export default ({ email, confirmCode }) =>
   new Promise(async (resolve, reject) => {
     if (!email || !confirmCode)
@@ -8,13 +10,13 @@ export default ({ email, confirmCode }) =>
     const emailTransfer = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.SENDER_MAIL,
-        pass: process.env.SENDER_MAIL_PW,
+        user: api.senderMail,
+        pass: api.senderMailPw
       },
     });
 
     const emailInfo = {
-      from: process.env.SENDER_MAIL,
+      from: api.senderMail,
       to: email,
       subject: 'Verify your e-mail address! (AppName)',
       text: `Here is your confirm code: ${confirmCode}`,

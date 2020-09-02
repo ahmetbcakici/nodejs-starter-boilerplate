@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 
 import { User } from '../../../models'
 import { loginSchema } from '../../validators/user.validators'
+import { api } from '../../../config'
 
 export default async (req, res, next) => {
   const { email, password } = req.body
@@ -25,7 +26,7 @@ export default async (req, res, next) => {
     }
 
     user.password = null
-    const token = await jwt.sign({ user }, process.env.JWT_SECRET_KEY)
+    const token = await jwt.sign({ user }, api.jwtSecretKey)
     res.status(200).json({ user, token })
   }
   catch (err) {

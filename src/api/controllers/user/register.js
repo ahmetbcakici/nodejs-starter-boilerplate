@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { User } from '../../../models'
 import { registerSchema } from '../../validators/user.validators'
 import { logger } from '../../../config/'
+import { api } from '../../../config'
 
 export default async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ export default async (req, res, next) => {
     /* @TODO: prevent log pw */
     logger.info("registerUser:" + JSON.stringify(req.body))
 
-    const token = await jwt.sign({ user }, process.env.JWT_SECRET_KEY)
+    const token = await jwt.sign({ user }, api.jwtSecretKey)
 
     return res.status(201).json({ user, token })
   }

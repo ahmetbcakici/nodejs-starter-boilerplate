@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { sendCodeToEmail, generateRandomCode } from '../../../utils'
 import { User } from '../../../models'
 import { emailSchema } from '../../validators/user.validators'
+import { api } from '../../../config'
 
 export default async (req, res, next) => {
   const { email } = req.body
@@ -28,7 +29,7 @@ export default async (req, res, next) => {
 
     console.log(confirmCode)
     /* await sendCodeToEmail({email, confirmCode}); */
-    const token = await jwt.sign({ confirmCode }, process.env.JWT_SECRET_KEY)
+    const token = await jwt.sign({ confirmCode }, api.jwtSecretKey)
     return res.status(200).json({ token })
   }
   catch (err) {

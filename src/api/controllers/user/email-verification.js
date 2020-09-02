@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import { emailVerificationSchema } from '../../validators/user.validators'
+import { api } from '../../../config'
 
 export default async (req, res, next) => {
   const { code, token } = req.body
@@ -8,7 +9,7 @@ export default async (req, res, next) => {
   try {
     await emailVerificationSchema.validateAsync(req.body)
 
-    const { confirmCode } = await jwt.verify(token, process.env.JWT_SECRET_KEY)
+    const { confirmCode } = await jwt.verify(token, api.jwtSecretKey)
 
     if (code !== confirmCode) {
       const err = new Error('Incorrect confirm code')

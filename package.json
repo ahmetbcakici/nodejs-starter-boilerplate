@@ -24,7 +24,6 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "helmet": "^4.1.0",
-    "jest": "^26.4.0",
     "jest-esm-transformer": "^1.0.0",
     "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
@@ -36,12 +35,12 @@
     "randomstring": "^1.1.5",
     "redis": "^3.0.2",
     "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4",
-    "winston": "^3.3.3"
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.4.2"
   }
 }
