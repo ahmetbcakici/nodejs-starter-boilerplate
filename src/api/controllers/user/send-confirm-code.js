@@ -14,12 +14,6 @@ export default async (req, res, next) => {
 
     /* @TODO: invalid e-mail check */
 
-    if (!email) {
-      const err = new Error('You can not leave fields empty')
-      err['status'] = 400
-      return next(err)
-    }
-
     const existingEmailCount = await User.countDocuments({ email })
     if (existingEmailCount) {
       const err = new Error('This e-mail address already registered')
