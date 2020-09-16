@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node -r esm src/app.js",
     "start-dev": "nodemon -r esm src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1"
   },
   "keywords": [
     "node.js",
