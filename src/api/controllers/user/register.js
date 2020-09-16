@@ -11,10 +11,9 @@ export default async (req, res, next) => {
 
     const user = await User.create(req.body)
     user.password = null // prevent send pw to client
+    req.body.password = null // prevent log pw
 
-    /* @TODO: prevent log pw */
     logger.info("registerUser:" + JSON.stringify(req.body))
-
     const token = await jwt.sign({ user }, api.jwtSecretKey)
 
     return res.status(201).json({ user, token })

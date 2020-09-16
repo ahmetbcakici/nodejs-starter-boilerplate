@@ -4,7 +4,8 @@
   "description": "Node.js starter boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r esm src/app.js",
+    "start": "node -r esm src/app.js",
+    "start-dev": "nodemon -r esm src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

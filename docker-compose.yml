@@ -1,11 +1,16 @@
 version: '3'
 services:
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - '27015:27015'
   app:
     container_name: docker-node-mongo
     restart: always
     build: .
     environment:
-      - DB_URI='mongodb://localhost:27018/db-name'
+      - DB_URI='mongodb://172.17.255.255:27015/db-name'
       - JWT_SECRET_KEY='9zVW]9cBNMbO'
       - SENDER_MAIL='sample@gmail.com'
       - SENDER_MAIL_PW='123'
@@ -13,9 +18,3 @@ services:
       - '8080:8080'
     external_links:
       - mongo
-  mongo:
-    container_name: mongo
-    image: mongo:latest
-    command: mongod --port 27018
-    ports:
-      - '27018:27018'
